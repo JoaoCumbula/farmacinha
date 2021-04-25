@@ -1,4 +1,3 @@
-import 'package:farmacinha/main.dart';
 import 'package:flutter/material.dart';
 import 'package:farmacinha/DatabaseManager.dart';
 
