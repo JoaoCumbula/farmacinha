@@ -1,3 +1,4 @@
+import 'package:farmacinha/details.dart';
 import 'package:flutter/material.dart';
 import 'package:farmacinha/DatabaseManager.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -13,11 +14,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.green,
-      ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      title: '',
+      theme: ThemeData(primarySwatch: Colors.blueGrey),
+      home: MyHomePage(title: 'Farmacias'),
     );
   }
 }
@@ -55,16 +54,13 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: Icon(Icons.local_pharmacy),
         title: Text(widget.title),
+        centerTitle: false,
         automaticallyImplyLeading: false,
         actions: [
           ElevatedButton(
-            onPressed: () {},
-            child: Icon(
-              Icons.edit,
-              color: Colors.white,
-            ),
-          )
+              onPressed: () {}, child: Icon(Icons.search, color: Colors.white))
         ],
       ),
       body: Container(
@@ -75,7 +71,17 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: ListTile(
                     title: Text(farmaciaList[index]["nome"]),
                     subtitle: Text(farmaciaList[index]["endereco"]),
-                    trailing: Text(farmaciaList[index]["cidade"]),
+                    trailing: IconButton(
+                      icon: Icon(Icons.chevron_right),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) {
+                            return DetailsPage(farmaciaList[index]["nome"]);
+                          }),
+                        );
+                      },
+                    ),
                   ),
                 );
               })),
