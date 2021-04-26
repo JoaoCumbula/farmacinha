@@ -8,15 +8,15 @@ class DetailsPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return _MyHomePageState(this.nome);
+    return _MyHomePageState(this.nome, this.endereco);
   }
 }
 
 class _MyHomePageState extends State<DetailsPage> {
   List categoriaList = [];
-  String nome;
+  String nome, endereco;
 
-  _MyHomePageState(this.nome);
+  _MyHomePageState(this.nome, this.endereco);
 
   @override
   void initState() {
@@ -45,48 +45,67 @@ class _MyHomePageState extends State<DetailsPage> {
           moveLastScreen();
         },
         child: Scaffold(
-          appBar: AppBar(
-            leading: IconButton(
-              icon: Icon(Icons.arrow_back_ios),
-              onPressed: () {
-                moveLastScreen();
-              },
-            ),
-            automaticallyImplyLeading: false,
-            actions: [
-              ElevatedButton(
-                  onPressed: () {},
-                  child: Icon(Icons.search, color: Colors.white))
+          body: CustomScrollView(
+            slivers: <Widget>[
+              SliverAppBar(
+                pinned: true,
+                floating: true,
+                snap: true,
+                expandedHeight: 200.0,
+                flexibleSpace: FlexibleSpaceBar(
+                  title: ListTile(
+                    title: Text(
+                      nome,
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    subtitle: Text(
+                      endereco,
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                  centerTitle: true,
+                ),
+                leading: IconButton(
+                  icon: Icon(Icons.arrow_back_ios),
+                  onPressed: () {
+                    moveLastScreen();
+                  },
+                ),
+                automaticallyImplyLeading: false,
+                actions: [
+                  ElevatedButton(
+                      onPressed: () {},
+                      child: Icon(Icons.search, color: Colors.white))
+                ],
+              ),
+              SliverList(delegate: SliverChildListDelegate(_getCategorias()))
             ],
-            title: Text(nome),
-            centerTitle: false,
           ),
-          body: Center(
-              child: ListView.builder(
-                  itemCount: categoriaList.length,
-                  itemBuilder: (context, index) {
-                    return Card(
-                      child: ListTile(
-                        title: Text(categoriaList[index]["nome"]),
-                        trailing: IconButton(
-                          icon: Icon(Icons.chevron_right),
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) {
-                                return ProductList(
-                                    categoriaList[index]["nome"]);
-                              }),
-                            );
-                          },
-                        ),
-                      ),
-                    );
-                  })),
         ));
   }
 
   void moveLastScreen() {
     Navigator.pop(context);
+  }
+
+  List<Widget> _getCategorias() {
+    List<Card> _cards = [];
+    for (int i = 0; i < categoriaList.length; i++) {
+      _cards.add(Card(
+          margin: EdgeInsets.all(8.0),
+          child: ListTile(
+              title: Text(categoriaList[i]["nome"]),
+              trailing: IconButton(
+                  icon: Icon(Icons.chevron_right),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) {
+                        return ProductList(categoriaList[i]["nome"]);
+                      }),
+                    );
+                  }))));
+    }
+    return _cards;
   }
 }
