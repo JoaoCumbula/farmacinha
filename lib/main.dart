@@ -77,7 +77,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) {
-                            return DetailsPage(farmaciaList[index]["nome"]);
+                            return DetailsPage(farmaciaList[index]["nome"],
+                                farmaciaList[index]["endereco"]);
                           }),
                         );
                       },

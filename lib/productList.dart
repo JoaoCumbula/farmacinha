@@ -1,10 +1,9 @@
-import 'package:farmacinha/productList.dart';
 import 'package:flutter/material.dart';
 import 'package:farmacinha/DatabaseManager.dart';
 
-class DetailsPage extends StatefulWidget {
-  final String nome, endereco;
-  DetailsPage(this.nome, this.endereco);
+class ProductList extends StatefulWidget {
+  final String nome;
+  ProductList(this.nome);
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -12,8 +11,8 @@ class DetailsPage extends StatefulWidget {
   }
 }
 
-class _MyHomePageState extends State<DetailsPage> {
-  List categoriaList = [];
+class _MyHomePageState extends State<ProductList> {
+  List productList = [];
   String nome;
 
   _MyHomePageState(this.nome);
@@ -31,7 +30,7 @@ class _MyHomePageState extends State<DetailsPage> {
       print("Unable to retrieve data");
     } else {
       setState(() {
-        categoriaList = resultant;
+        productList = resultant;
       });
     }
   }
@@ -63,23 +62,11 @@ class _MyHomePageState extends State<DetailsPage> {
           ),
           body: Center(
               child: ListView.builder(
-                  itemCount: categoriaList.length,
+                  itemCount: productList.length,
                   itemBuilder: (context, index) {
                     return Card(
                       child: ListTile(
-                        title: Text(categoriaList[index]["nome"]),
-                        trailing: IconButton(
-                          icon: Icon(Icons.chevron_right),
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) {
-                                return ProductList(
-                                    categoriaList[index]["nome"]);
-                              }),
-                            );
-                          },
-                        ),
+                        title: Text(productList[index]["nome"]),
                       ),
                     );
                   })),
