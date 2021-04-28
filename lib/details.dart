@@ -3,20 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:farmacinha/DatabaseManager.dart';
 
 class DetailsPage extends StatefulWidget {
-  final String nome, endereco;
-  DetailsPage(this.nome, this.endereco);
+  final String nome, phone1, phone2;
+  DetailsPage(this.nome, this.phone1, this.phone2);
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return _MyHomePageState(this.nome, this.endereco);
+    return _MyHomePageState(this.nome, this.phone1, this.phone2);
   }
 }
 
 class _MyHomePageState extends State<DetailsPage> {
   List categoriaList = [];
-  String nome, endereco;
+  String nome, phone1, phone2;
 
-  _MyHomePageState(this.nome, this.endereco);
+  _MyHomePageState(this.nome, this.phone1, this.phone2);
 
   @override
   void initState() {
@@ -41,6 +41,7 @@ class _MyHomePageState extends State<DetailsPage> {
     // TODO: implement build
 
     return WillPopScope(
+        // ignore: missing_return
         onWillPop: () {
           moveLastScreen();
         },
@@ -51,15 +52,18 @@ class _MyHomePageState extends State<DetailsPage> {
                 pinned: true,
                 floating: true,
                 snap: true,
-                expandedHeight: 200.0,
+                expandedHeight: 150.0,
                 flexibleSpace: FlexibleSpaceBar(
+                  titlePadding: EdgeInsets.zero,
                   title: ListTile(
                     title: Text(
-                      nome,
+                      "$nome",
+                      textAlign: TextAlign.center,
                       style: TextStyle(color: Colors.white),
                     ),
                     subtitle: Text(
-                      endereco,
+                      "$phone1, $phone2",
+                      textAlign: TextAlign.center,
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
@@ -72,10 +76,13 @@ class _MyHomePageState extends State<DetailsPage> {
                   },
                 ),
                 automaticallyImplyLeading: false,
-                actions: [
+                actions: <Widget>[
                   ElevatedButton(
                       onPressed: () {},
-                      child: Icon(Icons.search, color: Colors.white))
+                      child: Icon(Icons.call, color: Colors.white)),
+                  ElevatedButton(
+                      onPressed: () {},
+                      child: Icon(Icons.search, color: Colors.white)),
                 ],
               ),
               SliverList(delegate: SliverChildListDelegate(_getCategorias()))

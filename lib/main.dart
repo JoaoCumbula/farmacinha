@@ -61,7 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
         automaticallyImplyLeading: false,
         actions: [
           ElevatedButton(
-              onPressed: () {}, child: Icon(Icons.search, color: Colors.white))
+              onPressed: () {}, child: Icon(Icons.search, color: Colors.white)),
         ],
       ),
       body: Container(
@@ -78,8 +78,10 @@ class _MyHomePageState extends State<MyHomePage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) {
-                            return DetailsPage(farmaciaList[index]["nome"],
-                                farmaciaList[index]["endereco"]);
+                            return DetailsPage(
+                                farmaciaList[index]["nome"],
+                                farmaciaList[index]["telefone1"],
+                                farmaciaList[index]["telefone2"]);
                           }),
                         );
                       },
