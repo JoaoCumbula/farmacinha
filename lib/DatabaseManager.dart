@@ -5,8 +5,6 @@ class DatabaseManager {
       FirebaseFirestore.instance.collection('farmacia');
   final CollectionReference categoriaList =
       FirebaseFirestore.instance.collection('categoria');
-  final CollectionReference produtoList =
-      FirebaseFirestore.instance.collection('medicamento');
 
   Future getFarmaciaList() async {
     List itemList = [];
@@ -40,10 +38,14 @@ class DatabaseManager {
     }
   }
 
-  Future getProdutoList() async {
+  Future getProdutoList(nome) async {
+    final CollectionReference produtoList = FirebaseFirestore.instance
+        .collection('categoria')
+        .doc(nome)
+        .collection('produto');
     List itemList = [];
     try {
-      await categoriaList.get().then((querySnapshot) {
+      await produtoList.get().then((querySnapshot) {
         print("loaded snapshot");
         querySnapshot.docs.forEach((element) {
           itemList.add(element.data());

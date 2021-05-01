@@ -77,12 +77,8 @@ class _MyHomePageState extends State<DetailsPage> {
                 ),
                 automaticallyImplyLeading: false,
                 actions: <Widget>[
-                  ElevatedButton(
-                      onPressed: () {},
-                      child: Icon(Icons.call, color: Colors.white)),
-                  ElevatedButton(
-                      onPressed: () {},
-                      child: Icon(Icons.search, color: Colors.white)),
+                  IconButton(icon: Icon(Icons.call), onPressed: () {}),
+                  IconButton(icon: Icon(Icons.search), onPressed: () {})
                 ],
               ),
               SliverList(delegate: SliverChildListDelegate(_getCategorias()))

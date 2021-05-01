@@ -24,7 +24,7 @@ class _MyHomePageState extends State<ProductList> {
   }
 
   fetchDatabaseList() async {
-    dynamic resultant = await DatabaseManager().getCategoriaList();
+    dynamic resultant = await DatabaseManager().getProdutoList(nome);
 
     if (resultant == null) {
       print("Unable to retrieve data");
@@ -53,9 +53,7 @@ class _MyHomePageState extends State<ProductList> {
             ),
             automaticallyImplyLeading: false,
             actions: [
-              ElevatedButton(
-                  onPressed: () {},
-                  child: Icon(Icons.search, color: Colors.white))
+              IconButton(icon: Icon(Icons.search), onPressed: () {}),
             ],
             title: Text(nome),
             centerTitle: false,
@@ -67,6 +65,14 @@ class _MyHomePageState extends State<ProductList> {
                     return Card(
                       child: ListTile(
                         title: Text(productList[index]["nome"]),
+                        subtitle: Text(productList[index]["descricao"]),
+                        trailing: Text(
+                          productList[index]["preco"] + " MZN",
+                          style: TextStyle(
+                              color: Colors.blueGrey,
+                              fontSize: 17,
+                              fontWeight: FontWeight.w500),
+                        ),
                       ),
                     );
                   })),

@@ -60,8 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
         centerTitle: false,
         automaticallyImplyLeading: false,
         actions: [
-          ElevatedButton(
-              onPressed: () {}, child: Icon(Icons.search, color: Colors.white)),
+          IconButton(icon: Icon(Icons.search), onPressed: () {}),
         ],
       ),
       body: Container(
