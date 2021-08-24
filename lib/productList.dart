@@ -64,7 +64,8 @@ class _MyHomePageState extends State<ProductList> {
                   itemBuilder: (context, index) {
                     return Card(
                       child: ListTile(
-                        title: Text(productList[index]["nome"]),
+                        title: Text(productList[index]["nome"] +
+                            productList[index]["dosagem"]),
                         subtitle: Text(productList[index]["descricao"]),
                         trailing: Text(
                           productList[index]["preco"] + " MZN",

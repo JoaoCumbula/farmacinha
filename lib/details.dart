@@ -62,7 +62,7 @@ class _MyHomePageState extends State<DetailsPage> {
                       style: TextStyle(color: Colors.white),
                     ),
                     subtitle: Text(
-                      "$phone1, $phone2",
+                      "$phone1 $phone2",
                       textAlign: TextAlign.center,
                       style: TextStyle(color: Colors.white),
                     ),
